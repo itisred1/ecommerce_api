@@ -23,7 +23,8 @@ class ProductController extends Controller
         $validateData = $request->validate([
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0'
+            'stock' => 'required|integer|min:0',
+            'category_id' => 'required|exists:categories,id'
         ]);
 
         $product = Product::create($validateData);
@@ -39,9 +40,10 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         $validateData = $request->validate([
-            'name' => 'string|max:255',
-            'price' => 'numeric|min:0',
-            'stock' => 'integer|min:0'
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'category_id' => 'required|exists:categories,id'
         ]);
 
         $product->update($validateData);
